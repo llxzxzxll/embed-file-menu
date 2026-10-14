@@ -1,0 +1,11 @@
+{
+  "name": "embed-file-menu",
+  "version": "1.0.0",
+  "description": "Right-click menu for embedded files in reading view.",
+  "main": "main.js",
+  "scripts": {
+    "build": "node -e \"require('fs').copyFileSync('src/main.js', 'main.js')\""
+  },
+  "author": "LXXVII",
+  "license": "MIT"
+}
