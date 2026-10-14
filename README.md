@@ -34,7 +34,6 @@ When you embed attachments (`![[archive.zip]]`, `![[installer.exe]]`, `![[report
 | **Copy file path** | Copies the absolute system path of the file to the clipboard. | Desktop & Mobile |
 | **Copy folder path** | Copies the absolute system path of the parent directory. | Desktop & Mobile |
 
-> [!NOTE]
 > **Linux Clipboard Support:** To copy binary file objects on Linux, the plugin automatically detects your session type and uses `wl-copy` (Wayland) or `xclip` (X11).
 
 ## Localization
@@ -65,10 +64,10 @@ English (`en`), Russian (`ru`), Ukrainian (`uk`), Belarusian (`be`), German (`de
 
 Embed File Menu is free and open source. If it's useful to you, you can support its development with TON or USDT on the TON network: <kbd>tonproxywallet.ton</kbd> | <kbd>UQALKfbKI2Czizms4SisKXHnejG2iEoH26O-fy3_rJ5FbJDu</kbd>
 
-**Thank you!**
+Thank you!
 
 ---
 
 License
 
-[MIT License](LICENSE) © [LXXVII](https://github.com/llxzxzxll).
+[MIT License](LICENSE) © [LXXVII](https://github.com/llxzxzxll)
