@@ -468,13 +468,6 @@ function detectLanguage() {
   } catch (e) {
     raw = "";
   }
-  if (!raw) {
-    try {
-      raw = window.localStorage.getItem("language") || "";
-    } catch (e) {
-      raw = "";
-    }
-  }
   if (!raw && window.moment && typeof window.moment.locale === "function") {
     raw = window.moment.locale();
   }
@@ -502,7 +495,12 @@ module.exports = class EmbedFileMenu extends Plugin {
 
   onContextMenu(evt) {
     const target = evt.target;
-    const embed = target && target.closest ? target.closest(".internal-embed[src]") : null;
+    if (!target || typeof target.closest !== "function") return;
+
+    if (window.getSelection()?.toString()) return;
+    if (target.closest("a.internal-link, a.external-link")) return;
+
+    const embed = target.closest(".internal-embed[src]");
     if (!embed) return;
 
     const src = embed.getAttribute("src");
@@ -565,7 +563,8 @@ module.exports = class EmbedFileMenu extends Plugin {
   }
 
   getFullPath(file) {
-    let p = this.app.vault.adapter.getFullPath(file.path);
+    const adapter = this.app.vault.adapter;
+    let p = typeof adapter.getFullPath === "function" ? adapter.getFullPath(file.path) : file.path;
     if (Platform.isWin) p = p.replace(/\//g, "\\");
     return p;
   }
@@ -576,7 +575,8 @@ module.exports = class EmbedFileMenu extends Plugin {
       let p = this.getFullPath(file);
       if (folderOnly) {
         const sep = p.includes("\\") ? "\\" : "/";
-        p = p.slice(0, p.lastIndexOf(sep) + 1);
+        const idx = p.lastIndexOf(sep);
+        p = idx !== -1 ? p.slice(0, idx + 1) : "";
       }
       if (WRAP_IN_QUOTES) p = `"${p}"`;
       await navigator.clipboard.writeText(p);
@@ -626,7 +626,8 @@ module.exports = class EmbedFileMenu extends Plugin {
           done
         );
       } else {
-        const uri = "file://" + encodeURI(p) + "\n";
+        const { pathToFileURL } = require("url");
+        const uri = pathToFileURL(p).href + "\n";
         const isWayland = !!process.env.WAYLAND_DISPLAY;
         const cmd = isWayland ? "wl-copy" : "xclip";
         const args = isWayland
