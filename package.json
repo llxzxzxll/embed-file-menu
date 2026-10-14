@@ -1,6 +1,6 @@
 {
   "name": "embed-file-menu",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Right-click menu for embedded files in reading view.",
   "main": "main.js",
   "scripts": {
