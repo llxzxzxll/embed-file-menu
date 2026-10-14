@@ -1,7 +1,7 @@
 {
 	"id": "embed-file-menu",
 	"name": "Embed File Menu",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"minAppVersion": "1.4.0",
 	"description": "Right-click menu for embedded files in reading view.",
 	"author": "LXXVII",
